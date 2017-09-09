@@ -1,0 +1,47 @@
+<html ng-app="myApp">
+	<head>
+		<title>Whoops</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		
+		<!-- AngularJS -->
+		<script src="libs/angularjs/angular.min.js"></script>
+		<script src="libs/angularjs/angular-animate.min.js"></script>
+		<script src="libs/angularjs/angular-aria.min.js"></script>
+		<script src="libs/angularjs/angular-messages.min.js"></script>
+		<script src="libs/angularjs/angular-route.min.js"></script>
+		<script src="libs/angularjs/angular-sanitize.min.js"></script>
+		<script src="libs/angularjs/angular-material.min.js"></script>
+
+
+		<script src="/app.js"></script>
+		<script src="libs/angularjs/angular-material.min.js"></script>
+
+		<link rel="stylesheet" href="styles/styles.css">
+	</head>
+
+	<body style="padding-bottom:90px; ">
+
+		<div ng-view>
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-bottom" style="padding-top:10px">
+		  <div class="container">
+		    	<div class="row">
+		    		<a href="#profile" class="col-xs-4">
+		    			<center><label><span  style="font-size:80px" class="glyphicon glyphicon-user text-lg text-muted"></span></label></center>
+		    		</a>
+		    		<a href="#homepage" class="col-xs-4">
+		    			<center><label><span  style="font-size:80px" class="text-primary glyphicon glyphicon-home text-lg text-muted"></span></label></center>
+		    		</a>
+		    		<a href="#ranking" class="col-xs-4">
+		    			<center><label><span style="font-size:80px;" class="glyphicon glyphicon-record text-lg text-muted"></span></label></center>
+		    		</a>
+		    	</div>
+		  </div>
+		</nav>
+	<div id="conteudo">
+	</div>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsJDMTK8gKOOolnFwyj1llufkgtWRNDk0&libraries=places"
+	async defer> 
+	</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+.card-box {
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 3px;
+    border-radius: 15px;
+    -moz-border-radius: 3px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.sexy-line { 
+    display:block;
+    border:none;
+    color:white;
+    height:0.4px;
+    background:lightgrey;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(grey), to(#fff));
+}
+.btn-circle {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.42;
+	border-radius: 55px;
+	background-color: white;
+
+}
+.text-sm {
+	font-size: 20px;
+}
+.text-md {
+	font-size: 25px;
+}
+.text-lg{
+	font-size: 30px;
+}
+.cor-verde {
+	color: #1ea69a;
+}

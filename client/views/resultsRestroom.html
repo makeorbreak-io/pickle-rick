@@ -1,0 +1,31 @@
+<div ng-controller="resultsRestroom" class="container-fuid" ng-init="init()">
+	<div style="padding-bottom: 20px; padding-top: 20px; background-color: #274c3e">
+		<h2 style="color: white; margin-top:0px; margin-bottom: 0px"> 
+			<span style="margin-top:2px; margin-left:20px" class="glyphicon glyphicon-globe"></span> &nbsp; <b>CLOSEST PLACES TO YOUR LOCATION</b>
+		</h2>
+		</div>
+		
+		<div class="list-group">
+			<a class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="place in nearRestrooms" ng-click="openRestroom(place)" style="background-color:#4aad99; color:white">
+				    <div class="row">
+			    	<div class="col-sm-2">
+			    	</div>
+
+			    	<div class="col-sm-10">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h2 class="mb-1">{{place.name}}</h2>
+					      <h3>{{place.vicinity}}</h3>
+					      <h2>
+					      	<span class="glyphicon glyphicon-star" style="color:#8c603a"></span> 
+					      	<span class="glyphicon glyphicon-star" style="color:#8c603a"></span>
+					      	<span class="glyphicon glyphicon-star" style="color:#8c603a"></span>
+					      	<span class="glyphicon glyphicon-star" style="color:#8c603a"></span>
+					      	<span class="glyphicon glyphicon-star" style="color:#8c603a"></span>
+					      </h2>
+					    </div>
+				    </div>
+			    </div>
+			  </a>
+		 </div>
+	</div>
+</div> 

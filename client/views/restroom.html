@@ -1,0 +1,199 @@
+<div ng-controller="restroom" class="container-fuid" style="background-color: #f1f1f1;" ng-init="init()">
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="card-box">
+				<div class="row">
+					<div style="height: 400px; width: 100%;overflow: hidden;">
+						<img ng-src="{{restroom.photoUrl}}"
+						style="width: 100%">
+					</div>
+					<br>
+					<center>
+					<div>
+						<label class="text-uppercase text-lg">{{restroom.name}}</label>
+					</div>
+					<div>
+						<label class="text-muted text-md">Open - {{restroom.address}}</label>
+					</div>
+					</center>
+					
+					<div class="row">
+						<center>
+							<div>
+								<label class="text-md"><img  src="assets/poop-rank.png" width="200px" height="auto"> <p style="font-size:50px">{{restroomRate}}<p></label>
+							</div>
+							<div class="row text-muted">
+								<label class="text-sm">{{restroomTotalRates}} classificacoes • {{restroom.totalPoops}} estiveram aqui • {{restroom.totalFavorites}} favoritos</label>
+							</div>
+							<div class="col-xs-12" style="margin-top:20px">
+								<img src="assets/PN.png" width="120px" height="auto"> 
+								<img src="assets/CFN.png" style="margin-left:80px; margin-right:80px" width="120px" height="auto">
+								<img src="assets/CN.png" width="120px" height="auto">
+							</div>
+							
+						</center>
+					</div>
+					<br>
+					<div class="row">
+						<center>
+							<div class="col-xs-3">
+							</div>
+							<div class="col-xs-2">
+									<button type="button" class="btn btn-circle" style="color:black">
+							        	<span class="glyphicon glyphicon-map-marker text-lg text-muted"></span>
+							        </button>
+									<label class="text-muted text-sm">I was here</label>
+							</div>
+							<div class="col-xs-2">
+									<button type="button" ng-click="rateClicked=!rateClicked" class="btn btn-circle">
+							        	<span class="glyphicon glyphicon-star text-lg text-muted"></span>
+							        </button>
+									<label class="text-muted text-sm">Rate</label>
+							</div>
+							<div class="col-xs-2">
+									<button type="button" class="btn btn-circle" style="color:black">
+							        	<span class="glyphicon glyphicon-heart-empty text-lg text-muted"></span>
+							        </button>
+							        <label class="text-muted text-sm">Favourite</label>
+							</div>
+						</center>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12" ng-show="rateClicked">
+			<div class="card-box">
+				<div class="row">
+					<div class="col-xs-12">
+						<center>
+							<h3>Rate this Restroom</h3>
+							<img ng-src="{{poopImage[0]}}" ng-click="rate(1)" width="140px" height="auto">
+							<img ng-src="{{poopImage[1]}}" ng-click="rate(2)" width="140px" height="auto">
+							<img ng-src="{{poopImage[2]}}" ng-click="rate(3)" width="140px" height="auto">
+							<img ng-src="{{poopImage[3]}}" ng-click="rate(4)" width="140px" height="auto">
+							<img ng-src="{{poopImage[4]}}" ng-click="rate(5)" width="140px" height="auto">
+							<br>
+							<br>
+							<br>
+							<h3>Give a badge</h3>
+							<img src="assets/PN.png" ng-click="giveBadge(3)"  width="120px" height="auto">
+							<img src="assets/CN.png" ng-click="giveBadge(4)" style="margin-left:50px; margin-right:50px" width="120px" height="auto">
+							<img src="assets/CFN.png" ng-click="giveBadge(5)" width="120px" height="auto">
+							<br>
+							<br>
+							<br>
+							<textarea rows="5" class="col-xs-12" style="font-size:40px; border:1px solid black"></textarea>
+
+							</center>
+							<button class="btn btn-primary btn-lg" style="margin-top:20px">Leave Comment</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="card-box">
+				<div class="row">
+					<div class="col-xs-6">
+						<form>
+							<div class="form-group">
+								<label class="text-muted text-md">Type</label><br>
+						    	<label class="text-md">University</label>
+						  	</div>
+						  	<div class="form-group">
+								<label class="text-muted text-md">Minimum Consumption</label><br>
+						    	<label class="text-md">None</label>
+						  	</div>
+							<div class="form-group">
+								<label class="text-muted text-md">Minimum Consumption</label><br>
+						    	<label class="text-md">None</label>
+						  	</div>	
+						  	<div class="form-group">
+								<label class="text-muted text-md">Handicap Accessible</label><br>
+						    	<label class="text-md">Yes</label>
+						  	</div>	
+						</form>
+					</div>
+					<div class="col-xs-6">
+						<form>
+							<div class="form-group">
+								<label class="text-md"><span class="glyphicon glyphicon-ok-sign text-lg text-success"></span>Wi-fi</label>
+						  	</div>
+						  	<div class="form-group">
+								<label class="text-md"><span class="glyphicon glyphicon-ok-sign text-lg text-success"></span>Soft Toillet Paper</label>
+						  	</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="card-box">
+				<div class="row">
+					<div class="col-xs-12">
+						<address class="text-md">
+						<strong>ISEP</strong><br>
+					  	Rua dos Tronos, 1337<br>
+						Amial, Porto 4300-209<br>
+						<abbr title="Phone">P:</abbr> 223 987 432
+					</address>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="card-box">
+				<div class="row">
+					<div class="col-xs-12" id="cabecalhoComentario">
+						<div class="row">
+							<div class="col-xs-9">
+								<div class="row">
+									<div class="col-xs-2">
+										<img src="lula.jpg"  style="height: 100px; width: 100px; border-radius: 55px" >
+									</div>
+									<div class="col-xs-6">
+										<label class="text-md">Luis Sousa</label>
+										<label class="text-sm text-muted">60 poops • 30 comments</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-xs-5">
+								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
+								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
+								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
+								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
+								<label class="text-md"><span class="glyphicon glyphicon-star-empty text-lg cor-verde"></span></label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-xs-12">
+								<label class="text-md">
+									Gostei muito desta casa de banho, bastante limpa, nao tive de pagar e correspondeu as expectativas.
+									Recomendo para toda a gente.
+								</label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-xs-6">
+								<label class="text-md text-muted">6 likes</label>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xs-8">
+								<label class="text-lg text-muted"><span class="glyphicon glyphicon-heart text-lg text-muted"></span> like</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+<div>
