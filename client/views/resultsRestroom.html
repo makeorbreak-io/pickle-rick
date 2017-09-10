@@ -33,10 +33,10 @@
 					     		<div class="col-sm-4">
 					     			<div class="row" ng-init="getInternalId2(place.id, $index)">
 					     				
-					     				<img ng-show="place.badgeConfort" src="assets/CFB.png" width="80px" height="auto">
-					     				<img ng-show="place.badgeClean" src="assets/CB.png" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgeConfort}}" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgeClean}}" width="80px" height="auto">
 
-					     				<img ng-show="place.badgePrivacy" src="assets/PB.png" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgePrivacy}}" width="80px" height="auto">
 					     			</div>
 					     		</div>
 					     	</div>

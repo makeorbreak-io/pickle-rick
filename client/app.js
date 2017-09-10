@@ -172,7 +172,9 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    }).then(function success(response) {
 	    	var i;
 	    	var totalBadges = 0;
-
+			$scope.badgesPrivacy = 0;
+			$scope.badgesConfort = 0;
+			$scope.badgesClean = 0;
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == $scope.restroom._id){
 	    			if(response.data[i].idUser == userId){
@@ -203,9 +205,40 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 						$scope.imgClean = "assets/CB.png";
 						console.log("Clean");
 	    			}
+
+	    			
+
+
 	    		}
 
 	    	}
+	    	console.log("Privacy: " + $scope.badgesPrivacy);
+
+	    	console.log("Confort: " + $scope.badgesConfort);
+
+	    	console.log("Clean: " + $scope.badgesClean);
+	    	if($scope.badgesPrivacy >= 5 && $scope.badgesPrivacy < 10){
+		    		$scope.imgPrivacy = "assets/PP.png";
+		    	}
+		    	else if($scope.badgesPrivacy >= 10){
+		    		$scope.imgPrivacy = "assets/PO.png";
+		    	}
+
+		    	if($scope.badgesConfort >= 5 && $scope.badgesConfort < 10){
+		    		$scope.imgConfort = "assets/CFP.png";
+		    	}
+		    	else if($scope.badgesConfort >= 10){
+		    		$scope.imgConfort = "assets/CFO.png";
+		    	}
+
+		    	if($scope.badgesClean >= 5 && $scope.badgesClean < 10){
+		    		$scope.imgClean = "assets/CP.png";
+		    	}
+		    	else if($scope.badgesClean >= 10){
+		    		$scope.imgClean = "assets/CO.png";
+		    	}
+
+	    	
 	    	$scope.restroomTotalBadges = totalBadges;
 	    	
 	    	
@@ -408,25 +441,56 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	    }).then(function success(response) {
 	    	var i;
 	    	var totalBadges = 0;
+	    	$scope.nearRestrooms[index].badgePrivacy = 0;
+	    	$scope.nearRestrooms[index].badgeClean = 0;
+	    	$scope.nearRestrooms[index].badgeConfort = 0;
 
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == internalId){
 	    			
 	    			if(response.data[i].badge == 1){
-	    				$scope.nearRestrooms[index].badgePrivacy = true;
-						console.log("Privacidade");
+	    				$scope.nearRestrooms[index].badgePrivacy++;
 	    			}
 	    			else if(response.data[i].badge == 2){
-	    				$scope.nearRestrooms[index].badgeConfort = true;
-						console.log("Conf");
+	    				$scope.nearRestrooms[index].badgeConfort++;
 	    			}
 	    			else if(response.data[i].badge == 3){
-	    				$scope.nearRestrooms[index].badgeClean = true;
-						console.log("Clean");
+	    				$scope.nearRestrooms[index].badgeClean++;
 	    			}
 	    		}
-
 	    	}
+
+	    	if($scope.nearRestrooms[index].badgePrivacy > 0 && $scope.nearRestrooms[index].badgePrivacy < 5){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgePrivacy >= 5 && $scope.nearRestrooms[index].badgePrivacy < 10){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgePrivacy >= 10){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PO.png"
+	    	}
+
+	    	if($scope.nearRestrooms[index].badgeConfort > 0 && $scope.nearRestrooms[index].badgeConfort < 5){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 5 && $scope.nearRestrooms[index].badgeConfort < 10){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 10){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFO.png"
+	    	}
+
+	    	if($scope.nearRestrooms[index].badgeClean > 0 && $scope.nearRestrooms[index].badgeClean < 5){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeClean >= 5 && $scope.nearRestrooms[index].badgeClean < 10){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 10){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CO.png"
+	    	}
+	    	
+
 	    	$scope.restroomTotalBadges = totalBadges;
 	    	
 	    	
