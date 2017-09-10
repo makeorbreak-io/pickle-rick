@@ -24,6 +24,9 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/rankings', {
     	templateUrl : "views/rankings.html" 
     })
+    .when('/pooping', {
+    	templateUrl : "views/poopingPage.html" 
+    })
 });
 
 
