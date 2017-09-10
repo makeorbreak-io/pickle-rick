@@ -331,6 +331,54 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	    });
 	}
 
+	$scope.getInternalId2 = function(id, index){
+		$http({
+	        method : "GET",
+	        url : "api/restrooms/?id=" + id
+	    }).then(function success(response) {
+	        var internalId = response.data[0]._id;
+	        $scope.getBadges(internalId, index);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.getBadges = function(internalId, index){
+		$http({
+	        method : "GET",
+	        url : "api/restroomBadges"
+	    }).then(function success(response) {
+	    	var i;
+	    	var totalBadges = 0;
+
+	    	for(i = 0; i < response.data.length; i++){
+	    		if(response.data[i].idRestroom == internalId){
+	    			
+	    			if(response.data[i].badge == 1){
+	    				$scope.nearRestrooms[index].badgePrivacy = true;
+						console.log("Privacidade");
+	    			}
+	    			else if(response.data[i].badge == 2){
+	    				$scope.nearRestrooms[index].badgeConfort = true;
+						console.log("Conf");
+	    			}
+	    			else if(response.data[i].badge == 3){
+	    				$scope.nearRestrooms[index].badgeClean = true;
+						console.log("Clean");
+	    			}
+	    		}
+
+	    	}
+	    	$scope.restroomTotalBadges = totalBadges;
+	    	
+	    	
+
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+
 	$scope.getPlaces = function(){
 		var actualLocation = new google.maps.LatLng(41.1500879,-8.6042214);
         service = new google.maps.places.PlacesService(document.getElementById("conteudo"));
