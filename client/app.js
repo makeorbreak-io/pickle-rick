@@ -59,7 +59,23 @@ app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location
 	        method : "GET",
 	        url : "api/users/" + userId
 	    }).then(function success(response) {
+	        
 	        $scope.user = response.data;
+	        $scope.getNumberOfPoops();
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.getNumberOfPoops = function(){
+		console.log("DADOS");	
+		$http({
+	        method : "GET",
+	        url : "api/ratings?idUser=" + userId
+	    }).then(function success(response) {
+	        
+	        $scope.numberOfPoops = response.data;
+	        console.log($scope.numberOfPoops);
 	    }, function error(response) {
 	        console.log(response);
 	    });
