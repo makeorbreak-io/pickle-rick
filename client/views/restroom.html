@@ -27,9 +27,9 @@
 								<label class="text-sm">{{restroomTotalRates}} classificacoes • {{restroom.totalPoops}} estiveram aqui • {{restroom.totalFavorites}} favoritos</label>
 							</div>
 							<div class="col-xs-12" style="margin-top:20px">
-								<img src="assets/PN.png" width="120px" height="auto"> 
-								<img src="assets/CFN.png" style="margin-left:80px; margin-right:80px" width="120px" height="auto">
-								<img src="assets/CN.png" width="120px" height="auto">
+								<img ng-src="{{imgPrivacy}}" width="120px" height="auto">
+								<img ng-src="{{imgClean}}"  style="margin-left:80px; margin-right:80px"  width="120px" height="auto">
+								<img ng-src="{{imgConfort}}" width="120px" height="auto">
 							</div>
 							
 						</center>
@@ -67,6 +67,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<center>
+							<button class="btn btn-primary btn-lg" ng-click="papel()">PAPEL!!!</button>
 							<h3>Rate this Restroom</h3>
 							<img ng-src="{{poopImage[0]}}" ng-click="rate(1)" width="140px" height="auto">
 							<img ng-src="{{poopImage[1]}}" ng-click="rate(2)" width="140px" height="auto">
@@ -77,9 +78,9 @@
 							<br>
 							<br>
 							<h3>Give a badge</h3>
-							<img src="assets/PN.png" ng-click="giveBadge(3)"  width="120px" height="auto">
-							<img src="assets/CN.png" ng-click="giveBadge(4)" style="margin-left:50px; margin-right:50px" width="120px" height="auto">
-							<img src="assets/CFN.png" ng-click="giveBadge(5)" width="120px" height="auto">
+							<img ng-src="assets/PNW.png" ng-click="giveBadge(1)"  width="120px" height="auto">
+							<img src="assets/CNW.png" ng-click="giveBadge(3)" style="margin-left:50px; margin-right:50px" width="120px" height="auto">
+							<img src="assets/CFNW.png" ng-click="giveBadge(2)" width="120px" height="auto">
 							<br>
 							<br>
 							<br>

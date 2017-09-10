@@ -77,14 +77,19 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 
 	$scope.restroomTotalRates = 0;
 
-	$scope.badgesConfort;
-	$scope.badgesClean;
-	$scope.badgesPrivacy;
+	$scope.badgesConfort = 0;
+	$scope.badgesClean = 0;
+	$scope.badgesPrivacy = 0;
+
+	$scope.imgClean = "";
+	$scope.imgConf = "";
+	$scope.imgPrivacy = "";
 
 	$scope.init = function(){
 		$scope.getRestroomId();
 		$scope.getRestroomData();
 		$scope.getRating();
+		$scope.getBadges();
 	}
 
 	$scope.getRestroomId = function(){
@@ -133,6 +138,53 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    });
 	}
 
+	$scope.getBadges = function(){
+		$http({
+	        method : "GET",
+	        url : "api/restroomBadges"
+	    }).then(function success(response) {
+	    	var i;
+	    	var totalBadges = 0;
+
+	    	for(i = 0; i < response.data.length; i++){
+	    		if(response.data[i].idRestroom == $scope.restroom._id){
+	    			if(response.data[i].badge == 1){
+						$scope.badgesPrivacy++;
+						$scope.imgPrivacy = "assets/PN.png";
+						console.log("Privacidade");
+	    			}
+	    			else if(response.data[i].badge == 2){
+	    				$scope.badgesConfort++;
+	    				$scope.imgConfort = "assets/CFN.png";
+						console.log("Conf");
+	    			}
+	    			else if(response.data[i].badge == 3){
+						$scope.badgesClean++;
+						$scope.imgClean = "assets/CN.png";
+						console.log("Clean");
+	    			}
+	    		}
+	    	}
+	    	$scope.restroomTotalBadges = totalBadges;
+	    	
+	    	
+
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.papel = function(){
+		$http({
+	        method : "POST",
+	        url : "http://192.168.1.60/motor"
+	    }).then(function success(response) {
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
 	$scope.getPicture = function(){
 		
 		$scope.urlPicture = "https://maps.googleapis.com/maps/api/place/photo?photoreference=" + $scope.restroom.reference + "&maxwidth=600&key=AIzaSyCsJDMTK8gKOOolnFwyj1llufkgtWRNDk0"
@@ -150,7 +202,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	        }
 	    }).then(function success(response) { 
 	    	
-	    	//$scope.getBadges();
+	    	$scope.getBadges();
 	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
@@ -219,8 +271,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 	function callback(results, status) {
         var i = 0;
-        var maxResults = 5;
-        if(results.length < 5){
+        var maxResults = 10;
+        if(results.length < 10){
         	maxResults = results.length;
         }
         for(i = 0; i < maxResults; i++){
