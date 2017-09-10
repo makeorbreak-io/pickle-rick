@@ -1,5 +1,22 @@
-<div ng-controller="hangGame" class="container-fluid" style="padding-top:20px">
-	<center><img width="500px" height="auto" src="assets/nopaper.png"></center>
+<div ng-controller="hangGame" class="container-fluid" >
+	<div class="row">
+		<div class="card-box col-xs-12 cor-cardT1" style="padding: 30px" >
+			<div class="row">
+				<a href="#pooping">
+				<div class="col-xs-6" style="border-right:1px solid black" >
+					<center><label class="text-lg" style="color:white; font-size:40px">FACTS</label></center>
+				</div>
+				</a>
+
+				<a href="#hangGame">
+				<div class="col-xs-6">
+					<center><label class="text-lg" style="color:white; font-size:40px">GET PAPER!!!</label></center>
+				</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<center><img width="300px" height="auto" src="assets/nopaper.png"></center>
 	<br>
 	<br>
 	<h1>To get some paper you need to win on rock paper scissors</h1>
@@ -17,13 +34,13 @@
 		</div>
 	</div>
 
-	<div ng-show="showWin" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+	<div ng-show="showWin" class="card-box-redondo" style="position:absolute; margin-top:20%; top:950px; width:100%">
 		<center><text style="color:green; font-size:200px;">WIN</text></center>
 	</div>
-	<div ng-show="showDraw" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+	<div ng-show="showDraw" class="card-box-redondo" style="position:absolute; margin-top:20%; top:950px; width:100%">
 		<center><text style="color:yellow; font-size:200px;">DRAW</text></center>
 	</div>
-	<div ng-show="showLost" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+	<div ng-show="showLost" class="card-box-redondo" style="position:absolute; margin-top:20%; top:950px; width:100%">
 		<center><text style="color:red; font-size:200px;">LOSE</text></center>
 	</div>
 

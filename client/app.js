@@ -87,7 +87,6 @@ app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location
 	}
 
 	$scope.getUserData = function(){
-		console.log("DADOS");	
 		$http({
 	        method : "GET",
 	        url : "api/users/" + userId
@@ -101,14 +100,12 @@ app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location
 	}
 
 	$scope.getNumberOfPoops = function(){
-		console.log("DADOS");	
 		$http({
 	        method : "GET",
 	        url : "api/ratings?idUser=" + userId
 	    }).then(function success(response) {
 	        
 	        $scope.numberOfPoops = response.data;
-	        console.log($scope.numberOfPoops);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -154,7 +151,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	}
 
 	$scope.getPaper = function(){
-		console.log("PAPEL PAPEL PAPEL")
 		$http({
 	        method : "GET",
 	        url : "http://192.168.1.60/sensor"
@@ -166,7 +162,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	        	$scope.toiletPaper = "assets/papel.png";
 	        }
 
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -177,14 +172,12 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	}
 
 	$scope.getRestroomData = function(){
-		console.log("DADOS");	
 		$http({
 	        method : "GET",
 	        url : "api/restrooms?id=" + $scope.restroomId
 	    }).then(function success(response) {
 	        $scope.restroom = response.data[0];
 	        $scope.getPicture();
-	        console.log($scope.restroom);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -232,7 +225,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	
 
 	    }, function error(response) {
-	        console.log(response);
 	    });
 	}
 
@@ -264,17 +256,14 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    			if(response.data[i].badge == 1){
 						$scope.badgesPrivacy++;
 						$scope.imgPrivacy = "assets/PB.png";
-						console.log("Privacidade");
 	    			}
 	    			else if(response.data[i].badge == 2){
 	    				$scope.badgesConfort++;
 	    				$scope.imgConfort = "assets/CFB.png";
-						console.log("Conf");
 	    			}
 	    			else if(response.data[i].badge == 3){
 						$scope.badgesClean++;
 						$scope.imgClean = "assets/CB.png";
-						console.log("Clean");
 	    			}
 
 	    			
@@ -283,11 +272,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    		}
 
 	    	}
-	    	console.log("Privacy: " + $scope.badgesPrivacy);
-
-	    	console.log("Confort: " + $scope.badgesConfort);
-
-	    	console.log("Clean: " + $scope.badgesClean);
 	    	if($scope.badgesPrivacy >= 5 && $scope.badgesPrivacy < 10){
 		    		$scope.imgPrivacy = "assets/PP.png";
 		    	}
@@ -324,7 +308,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	        method : "POST",
 	        url : "http://192.168.1.60/motor"
 	    }).then(function success(response) {
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -348,15 +331,12 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    }).then(function success(response) { 
 	    	
 	    	$scope.getBadges();
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
 	}
 
 	$scope.rate = function(rate){
-		console.log(userId);
-		console.log($scope.restroom._id)
 		$http({
 	        method : "POST",
 	        url : "api/ratings",
@@ -375,7 +355,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    		$scope.poopImage[i] = "assets/poop-rank-outline.png";
 	    	}
 	    	$scope.getRating();
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -383,7 +362,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 
 	$scope.comment = "";
 	$scope.leaveComment = function(){
-		console.log($scope.comment);
 		$http({
 	        method : "POST",
 	        url : "api/comments",
@@ -396,7 +374,6 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	        }
 	    }).then(function success(response) { 
 	    	$scope.getComments();
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -404,19 +381,16 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	$scope.allComments = [];
 
 	$scope.getComments = function(){
-		console.log("CENAS")
 		$http({
 	        method : "GET",
 	        url : "api/comments"
 	    }).then(function success(response) {
 	    	var i;
-	    	console.log($scope.restroom._id);
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == $scope.restroom._id){
 	    			$scope.allComments.push(response.data[i]);
 	    		}
 	    	}
-	        console.log($scope.allComments);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -444,7 +418,6 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	}
 
 	$scope.getRating = function(internalId, index){
-		console.log("GET RATED");
 		$http({
 	        method : "GET",
 	        url : "api/ratings"
@@ -591,10 +564,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
         if(results.length < 10){
         	maxResults = results.length;
         }
-        console.log("GOOOOOGLE");
-        console.log(results);
+
         for(i = 0; i < maxResults; i++){
-        	console.log("Resultados API!");
         	
         	checkIfExists(results[i]);
 
@@ -606,15 +577,12 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
         else{
         	$scope.noResults = false;
         }
-        console.log("NEAR");
-        console.log($scope.nearRestrooms);
         $scope.$apply();
     }
 
     function checkIfExists(restroom){
     	
     	var i;
-    	console.log(restroom);
     	for(i = 0; i < $scope.allRestrooms.length; i++){
     		if($scope.allRestrooms[i].id == restroom.id)
     			return;
@@ -623,11 +591,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
     }
 
     $scope.createRestroom = function(restroom){
-    	console.log("RESTROOM to add");
-    	console.log(restroom)
     	var restroomPhoto = ""
     	if(restroom.photos){
-    		console.log("NAO TEM FOTO");
     		restroomPhoto = restroom.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
     	}
     	$http({
@@ -737,19 +702,16 @@ app.controller('hangGame', ['$scope', '$http', '$interval', '$window', '$locatio
 	}
 
 	$scope.papel = function(){
-		console.log
 		$http({
 	        method : "POST",
 	        url : "http://192.168.1.60/motor"
 	    }).then(function success(response) {
-	        console.log(response);
 	    }, function error(response) {
 	        console.log(response);
 	    });
 	}
 
 	$scope.papelR = function(){
-		console.log
 		$http({
 	        method : "POST",
 	        url : "http://192.168.1.60/motorev"
