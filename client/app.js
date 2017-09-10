@@ -21,6 +21,9 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/restroom', {
     	templateUrl : "views/restroom.html" 
     })
+    .when('/rankings', {
+    	templateUrl : "views/rankings.html" 
+    })
 });
 
 
