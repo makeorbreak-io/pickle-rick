@@ -29,13 +29,14 @@
         border-radius: 15px;
         background-clip: padding-box;
         margin-bottom: 20px;
-        background-color: black;
-        border: 2px solid yellow;
+        background-color: #2C54B0;
+        border: 2px solid white;
     }
     .btn-resposta{
+        
         border-radius:20px;
-        border: 3px solid yellow;
-        background-color: black;
+        border: 3px solid white;
+        background-color: #2868FC;
     }
     .btn-circle {
         width: 100px;
@@ -89,4 +90,17 @@
     }
     .cor-achievTitulo {
         color: white;
+    }
+    .text-xl{
+        font-size: 70px;
+    }
+    .cor-ranking{
+        background-color:#1ea69a;
+    }
+    .div-users-rank{
+        border-left: 1px solid lightgrey; 
+        background-color:#8DC6F5;
+    }
+    .div-restrooms-rank{
+        background-color:#ad8e77;
     }
