@@ -27,6 +27,9 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/pooping', {
     	templateUrl : "views/poopingPage.html" 
     })
+    .when('/hangGame', {
+    	templateUrl : "views/hangGame.html" 
+    })
     
 });
 
@@ -652,4 +655,87 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
   $scope.invert = Math.floor(Math.random() * 100);
 
   $scope.isDisabled = true;
+}]);
+
+app.controller('hangGame', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	//1 - rock
+	//2 - paper
+	//3 - scissor
+
+	$scope.showDraw = false;
+	$scope.showWin = false;
+	$scope.showLost = false;
+	$scope.init = function(){
+		
+	}
+	$scope.computerPlay;
+
+	$scope.play = function(idPlay){
+		$scope.showDraw = false;
+		$scope.showWin = false;
+		$scope.showLost = false;
+		$scope.computerPlay = Math.floor((Math.random() * 3) + 1);
+		if(idPlay == $scope.computerPlay){
+			$scope.showDraw = true;
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+		}
+		else if( (idPlay == 1 && $scope.computerPlay == 2) || (idPlay == 2 && $scope.computerPlay == 3) || (idPlay == 3 && $scope.computerPlay == 1) ){
+			$scope.showLost = true;
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+			$scope.papelR();
+		}
+		else{
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+			$scope.showWin = true;
+			$scope.papel();
+		}
+	}
+
+	$scope.papel = function(){
+		console.log
+		$http({
+	        method : "POST",
+	        url : "http://192.168.1.60/motor"
+	    }).then(function success(response) {
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.papelR = function(){
+		console.log
+		$http({
+	        method : "POST",
+	        url : "http://192.168.1.60/motorev"
+	    }).then(function success(response) {
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
 }]);

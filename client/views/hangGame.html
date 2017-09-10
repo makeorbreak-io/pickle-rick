@@ -1,0 +1,34 @@
+<div ng-controller="hangGame" class="container-fluid" style="padding-top:20px">
+	<center><img width="500px" height="auto" src="assets/nopaper.png"></center>
+	<br>
+	<br>
+	<h1>To get some paper you need to win on rock paper scissors</h1>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-xs-4" ng-click="play(1)">
+			<img width="300px" height="auto" src="assets/rock.png">
+		</div>
+		<div class="col-xs-4" ng-click="play(2)">
+			<img width="300px" height="auto" src="assets/paper.png">
+		</div>
+		<div class="col-xs-4" ng-click="play(3)">
+			<img width="300px" height="auto" src="assets/scissor.png">
+		</div>
+	</div>
+
+	<div ng-show="showWin" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+		<center><text style="color:green; font-size:200px;">WIN</text></center>
+	</div>
+	<div ng-show="showDraw" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+		<center><text style="color:yellow; font-size:200px;">DRAW</text></center>
+	</div>
+	<div ng-show="showLost" class="card-box-redondo" style="position:absolute; margin-top:20%; top:1100px; width:100%">
+		<center><text style="color:red; font-size:200px;">LOSE</text></center>
+	</div>
+
+	<center><h2>Choose wisely</h2></center>
+	
+	<center><img ng-src="{{imgGame}}" width="300px" height="auto"></center>
+	
+</div>
