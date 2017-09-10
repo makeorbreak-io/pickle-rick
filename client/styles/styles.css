@@ -104,6 +104,12 @@
     .div-restrooms-rank{
         background-color:#ad8e77;
     }
+    .text-dyn {
+        color:black;
+    }
+    .text-tip{
+        color:white;
+    }
 .slider {
     -webkit-appearance: none;
     width: 100%;
