@@ -1,5 +1,5 @@
 var modalInstance = {};
-var app = angular.module('myApp', ['ngRoute', 'ngMaterial']);
+var app = angular.module('myApp', ['ngRoute', 'ngMaterial','ngMessages']);
 
 var userId = "59b299729751dd27889de49c";
 
@@ -27,6 +27,7 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/pooping', {
     	templateUrl : "views/poopingPage.html" 
     })
+    
 });
 
 
@@ -573,4 +574,22 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
     	$location.path('/restroom').search({id: place.id});;
     }
     
+ 
+  $scope.color = {
+    red: Math.floor(Math.random() * 255),
+    green: Math.floor(Math.random() * 255),
+    blue: Math.floor(Math.random() * 255)
+  };
+
+  $scope.rating1 = 3;
+  $scope.rating2 = 2;
+  $scope.rating3 = 4;
+
+  $scope.disabled1 = Math.floor(Math.random() * 100);
+  $scope.disabled2 = 0;
+  $scope.disabled3 = 70;
+
+  $scope.invert = Math.floor(Math.random() * 100);
+
+  $scope.isDisabled = true;
 }]);
