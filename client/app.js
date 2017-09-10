@@ -85,6 +85,10 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	$scope.imgConf = "";
 	$scope.imgPrivacy = "";
 
+	$scope.userClean = "assets/CNW.png";
+	$scope.userConf = "assets/CFNW.png";
+	$scope.userPrivacy = "assets/PNW.png";
+
 	$scope.init = function(){
 		$scope.getRestroomId();
 		$scope.getRestroomData();
@@ -148,22 +152,36 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == $scope.restroom._id){
+	    			if(response.data[i].idUser == userId){
+	    				if(response.data[i].badge == 1){
+							$scope.userPrivacy = "assets/PN.png";
+	    				}
+
+	    				if(response.data[i].badge == 2){
+	    					$scope.userConf = "assets/CFN.png";
+	    				}
+
+	    				if(response.data[i].badge == 3){
+	    					$scope.userClean = "assets/CN.png";
+	    				}
+	    			}
 	    			if(response.data[i].badge == 1){
 						$scope.badgesPrivacy++;
-						$scope.imgPrivacy = "assets/PN.png";
+						$scope.imgPrivacy = "assets/PB.png";
 						console.log("Privacidade");
 	    			}
 	    			else if(response.data[i].badge == 2){
 	    				$scope.badgesConfort++;
-	    				$scope.imgConfort = "assets/CFN.png";
+	    				$scope.imgConfort = "assets/CFB.png";
 						console.log("Conf");
 	    			}
 	    			else if(response.data[i].badge == 3){
 						$scope.badgesClean++;
-						$scope.imgClean = "assets/CN.png";
+						$scope.imgClean = "assets/CB.png";
 						console.log("Clean");
 	    			}
 	    		}
+
 	    	}
 	    	$scope.restroomTotalBadges = totalBadges;
 	    	
@@ -263,7 +281,7 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
         var request = {
             location: actualLocation,
             radius: '20000',
-            type: ['shopping_mall']
+            type: ['park']
         };
         service.nearbySearch(request, callback);
 

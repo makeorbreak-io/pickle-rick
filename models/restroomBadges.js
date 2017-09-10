@@ -4,9 +4,9 @@ var mongoose = restful.mongoose;
 
 //Schema
 var restroomBadgeSchema = new mongoose.Schema({
-	userId: String,
-	restroomId: String,
-	badge: Number //1- confort, 2- privacy, 3- clean
+	idUser: String,
+	idRestroom: String,
+	badge: Number //1- privacy, 2- confort, 3- clean
 })
 
 //Return model
