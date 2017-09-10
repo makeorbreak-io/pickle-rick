@@ -83,6 +83,7 @@ app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location
 
 	$scope.init = function(){
 		$scope.getUserData();
+
 	}
 
 	$scope.getUserData = function(){
@@ -149,6 +150,26 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 		$scope.getRating();
 		$scope.getBadges();
 		$scope.getComments();
+		$scope.getPaper();
+	}
+
+	$scope.getPaper = function(){
+		console.log("PAPEL PAPEL PAPEL")
+		$http({
+	        method : "GET",
+	        url : "http://192.168.1.60/sensor"
+	    }).then(function success(response) {
+	        if(response.data.papel == 0){
+	        	$scope.toiletPaper = "assets/nopaper.png";
+	        }
+	        else{
+	        	$scope.toiletPaper = "assets/papel.png";
+	        }
+
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
 	}
 
 	$scope.getRestroomId = function(){
@@ -202,7 +223,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	else if($scope.restroomRate < "4.5"){
 	    		$scope.poopRate = "assets/rate4.png"
 	    	}
-	    	else if($scope.restroomRate <= "5.0"){
+	    	else if($scope.restroomRate <= "5.1"){
 	    		$scope.poopRate = "assets/rate5.png"
 	    	}
 	    	else{
