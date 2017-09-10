@@ -42,6 +42,32 @@ app.controller('homepage', ['$scope', '$http', '$interval', '$window', '$locatio
 	}
 }]);
 
+
+app.controller('menu', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	$scope.textColor1 = "";
+	$scope.textColor2 = "text-primary";
+	$scope.textColor3 = "";
+
+	$scope.changeTab1 = function(){
+		$scope.textColor2 = "";
+		$scope.textColor1 = "text-primary";
+		$scope.textColor3 = "";
+	}
+
+	$scope.changeTab2 = function(){
+		$scope.textColor1 = "";
+		$scope.textColor2 = "text-primary";
+		$scope.textColor3 = "";
+	}
+
+	$scope.changeTab3 = function(){
+		$scope.textColor2 = "";
+		$scope.textColor3 = "text-primary";
+		$scope.textColor1 = "";
+	}
+}]);
+
+
 app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
 	$scope.users = [];
 	$scope.user;
@@ -156,10 +182,28 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	}
 	    	$scope.restroomTotalRates = totalRates;
 	    	if(totalRates == 0){
-	    		$scope.restroomRate = "Sem classificação";
+	    		$scope.restroomRate = "N/A";
 	    	}
 	    	else{
 	    		$scope.restroomRate = (scoreRate/totalRates).toFixed(1) + " / 5";
+	    	}
+	    	if($scope.restroomRate < "1.5" ){
+	    		$scope.poopRate = "assets/rate1.png"
+	    	}
+	    	else if($scope.restroomRate < "2.5"){
+	    		$scope.poopRate = "assets/rate2.png"
+	    	}
+	    	else if($scope.restroomRate < "3.5"){
+	    		$scope.poopRate = "assets/rate3.png"
+	    	}
+	    	else if($scope.restroomRate < "4.5"){
+	    		$scope.poopRate = "assets/rate4.png"
+	    	}
+	    	else if($scope.restroomRate <= "5"){
+	    		$scope.poopRate = "assets/rate5.png"
+	    	}
+	    	else{
+	    		$scope.poopRate = "assets/ratesleep.png"
 	    	}
 	    	
 

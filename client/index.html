@@ -23,17 +23,17 @@
 
 		<div ng-view>
 		</div>
-		<nav class="navbar navbar-default navbar-fixed-bottom" style="padding-top:10px">
+		<nav class="navbar navbar-default navbar-fixed-bottom" style="padding-top:10px" ng-controller="menu" ng-init="init()">
 		  <div class="container">
 		    	<div class="row">
-		    		<a href="#profile" class="col-xs-4">
-		    			<center><label><span  style="font-size:80px" class="glyphicon glyphicon-user text-lg text-muted"></span></label></center>
+		    		<a href="#profile" class="col-xs-4" ng-click="changeTab1()">
+		    			<center><label><span style="font-size:80px" ng-class="textColor1" class="glyphicon glyphicon-user text-lg text-muted"></span></label></center>
 		    		</a>
-		    		<a href="#homepage" class="col-xs-4">
-		    			<center><label><span  style="font-size:80px" class="text-primary glyphicon glyphicon-home text-lg text-muted"></span></label></center>
+		    		<a href="#homepage" class="col-xs-4" ng-click="changeTab2()">
+		    			<center><label><span  style="font-size:80px" ng-class="textColor2" class="glyphicon glyphicon-home text-lg text-muted"></span></label></center>
 		    		</a>
-		    		<a href="#rankings" class="col-xs-4">
-		    			<center><label><span style="font-size:80px;" class="glyphicon glyphicon-record text-lg text-muted"></span></label></center>
+		    		<a href="#rankings" class="col-xs-4" ng-click="changeTab3()">
+		    			<center><label><span style="font-size:80px;" ng-class="textColor3" class="glyphicon glyphicon-king text-lg text-muted"></span></label></center>
 		    		</a>
 		    	</div>
 		  </div>
