@@ -19,6 +19,24 @@
         background-color: #ffffff;
         box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
     }
+    .card-box-pergunta {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 15px;
+        background-clip: padding-box;
+        margin-bottom: 20px;
+        background-color: black;
+        border: 2px solid yellow;
+    }
+    .btn-resposta{
+        border-radius:20px;
+        border: 3px solid yellow;
+        background-color: black;
+    }
     .btn-circle {
         width: 100px;
         height: 100px;
