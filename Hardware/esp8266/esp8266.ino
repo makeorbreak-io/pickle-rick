@@ -70,6 +70,7 @@ void loop() {
   String part03 = getValue(request,'/',2);
 
   char charBuf[50];
+  
   part02.toCharArray(charBuf, 20);
 
   Serial.println();
@@ -79,6 +80,7 @@ void loop() {
  if (strcmp(charBuf,"motor HTTP")==0)
   {
        client.println("HTTP/1.1 204 No Content");
+       client.println("Access-Control-Allow-Origin: *");
        client.println();
        Orient = 0;
        speed = 1000;
@@ -93,6 +95,7 @@ void loop() {
  if (strcmp(charBuf,"motorev HTTP")==0)
   {
        client.println("HTTP/1.1 204 No Content");
+       client.println("Access-Control-Allow-Origin: *");
        client.println();
        Orient = 1;
        speed = 1000;
@@ -109,8 +112,10 @@ if (strcmp(charBuf,"sensor HTTP")==0)
        papel = digitalRead(D6);
        client.println("HTTP/1.1 200 OK");
        client.println("Content-Type: application/json");
+       client.println("Access-Control-Allow-Origin: *");
        client.println();
        client.print("{\"papel\":");client.print(papel);client.print("}");
+       client.println();
        Serial.print("Papel = ");
        Serial.println(papel);
   }

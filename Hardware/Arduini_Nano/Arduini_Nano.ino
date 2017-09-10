@@ -23,7 +23,7 @@ void loop() {
   Serial.println(papelanalog);
   Serial.print("Papel = ");
   Serial.println(papel);
-  if (papelanalog >= 800) {
+  if (papelanalog >= 1000) {
     papel=1;
     digitalWrite(8, HIGH);
     digitalWrite(13, HIGH);
@@ -32,5 +32,5 @@ void loop() {
     digitalWrite(8, LOW);
     digitalWrite(13, LOW);
   }
-  delay(1000);        // delay in between reads for stability
+  delay(100);        // delay in between reads for stability
 }
