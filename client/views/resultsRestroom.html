@@ -2,7 +2,7 @@
 	<div class="card-box cor-cardT1">
 		<div class="row">
 			<div class="col-xs-12">
-				<label class="text-lg cor-titulo1">CLOSEST PLACES TO YOUR LOCATION</label>	
+				<b><label class="cor-titulo1" style="font-size:35px"><span class="glyphicon glyphicon-globe"></span> CLOSEST PLACES TO YOUR LOCATION</label></b>	
 			</div>
 		</div>
 	</div>
@@ -12,7 +12,7 @@
 				    <div class="row">
 			    	<div class="col-sm-2">
 			    		<div>
-							<img src="lula.jpg"  style="height: 100px; width: 100px; border-radius: 100px; border: 4px solid lightgrey;" >
+							<img ng-src="{{place.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500})}}"  style="height: 150px; width: 150px; border-radius: 100px; border: 4px solid lightgrey;" >
 						</div>
 						<center>
 							<div>
@@ -21,11 +21,11 @@
 						</center>
 			    	</div>
 
-			    	<div class="col-sm-10">
+			    	<div class="col-sm-10" style="padding-left:50px">
 					    <div class="d-flex w-100 justify-content-between">
 					     	<label class="text-lg cor-letra-md">{{place.name}}</label><br>
 					     	<label class="text-md text-muted ">{{place.vicinity}}</label>
-					     	<div class="row">
+					     	<div class="row" style="padding-left:10px">
 					     		<div class="col-sm-8">
 					     			<div class="row">
 							     		<img src="assets/poop-rank.png" width="80px" height="auto">
@@ -38,6 +38,8 @@
 					     		<div class="col-sm-4">
 					     			<div class="row">
 					     				<img src="assets/CFB.png" width="80px" height="auto">
+					     				<img src="assets/CFB.png" width="80px" height="auto">
+
 					     				<img src="assets/CFB.png" width="80px" height="auto">
 					     			</div>
 					     		</div>

@@ -306,6 +306,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
        		$scope.nearRestrooms.push(results[i]);
         }
+        console.log("NEAR");
+        console.log($scope.nearRestrooms);
         $scope.$apply();
     }
 
