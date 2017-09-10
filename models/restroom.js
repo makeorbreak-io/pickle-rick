@@ -16,7 +16,8 @@ var restroomSchema = new mongoose.Schema({
 	totalFavorites: Number,
 	reference: String,
 	address: String,
-	photoUrl: String
+	photoUrl: String,
+	rate: Number
 })
 
 //Return model
