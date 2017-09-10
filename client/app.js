@@ -281,6 +281,56 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	    });
 	}
 
+	$scope.getRating = function(internalId, index){
+		console.log("GET RATED");
+		$http({
+	        method : "GET",
+	        url : "api/ratings"
+	    }).then(function success(response) {
+	    	var i;
+	    	var totalRates = 0;
+	    	var scoreRate = 0;
+	    	var score;
+	    	for(i = 0; i < response.data.length; i++){
+	    		if(response.data[i].idRestroom == internalId){
+	    			totalRates++;
+	    			scoreRate += response.data[i].rate;
+	    		}
+	    	}
+	    	
+	    	if(totalRates == 0){
+	    		$scope.restroomRate = "Sem classificação";
+	    		$scope.nearRestrooms[index].score = "WHAT";
+	    	}
+	    	else{
+	    		$scope.nearRestrooms[index].score = (scoreRate/totalRates).toFixed(0);
+	    	}   
+	    	$scope.nearRestrooms[index].imgPoop = [];
+	    	for(i = 0; i < $scope.nearRestrooms[index].score; i++){
+	    		$scope.nearRestrooms[index].imgPoop[i] = "assets/poop-rank.png";
+	    	}
+	    	for(i = $scope.nearRestrooms[index].score; i < 5; i++){
+	    		$scope.nearRestrooms[index].imgPoop[i] = "assets/poop-rank-outline.png";
+	    	}
+	    	 
+
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.getInternalId = function(id, index){
+		$http({
+	        method : "GET",
+	        url : "api/restrooms/?id=" + id
+	    }).then(function success(response) {
+	        var internalId = response.data[0]._id;
+	        $scope.getRating(internalId, index);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
 	$scope.getPlaces = function(){
 		var actualLocation = new google.maps.LatLng(41.1500879,-8.6042214);
         service = new google.maps.places.PlacesService(document.getElementById("conteudo"));
@@ -295,8 +345,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 	function callback(results, status) {
         var i = 0;
-        var maxResults = 10;
-        if(results.length < 10){
+        var maxResults = 5;
+        if(results.length < 5){
         	maxResults = results.length;
         }
         for(i = 0; i < maxResults; i++){

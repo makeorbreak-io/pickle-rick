@@ -8,8 +8,8 @@
 	</div>
 		
 		<div class="list-group">
-			<a class="list-group-item card-box-redondo cor-card1 list-group-item-action flex-column align-items-start" ng-repeat="place in nearRestrooms" ng-click="openRestroom(place)">
-				    <div class="row">
+			<a class="list-group-item card-box-redondo cor-card1 list-group-item-action flex-column align-items-start" ng-repeat="place in nearRestrooms track by $index" ng-click="openRestroom(place)">
+			    <div class="row">
 			    	<div class="col-sm-2">
 			    		<div>
 							<img ng-src="{{place.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500})}}"  style="height: 150px; width: 150px; border-radius: 100px; border: 4px solid lightgrey;" >
@@ -27,12 +27,12 @@
 					     	<label class="text-md text-muted ">{{place.vicinity}}</label>
 					     	<div class="row" style="padding-left:10px">
 					     		<div class="col-sm-8">
-					     			<div class="row">
-							     		<img src="assets/poop-rank.png" width="80px" height="auto">
-							     		<img src="assets/poop-rank.png" width="80px" height="auto"> 
-							     		<img src="assets/poop-rank.png" width="80px" height="auto"> 
-							     		<img src="assets/poop-rank.png" width="80px" height="auto"> 
-							     		<img src="assets/poop-rank.png" width="80px" height="auto">
+					     			<div class="row" ng-init="getInternalId(place.id, $index)">
+							     		<img ng-src="{{place.imgPoop[0]}}" width="80px" height="auto">
+							     		<img ng-src="{{place.imgPoop[1]}}" width="80px" height="auto"> 
+							     		<img ng-src="{{place.imgPoop[2]}}" width="80px" height="auto"> 
+							     		<img ng-src="{{place.imgPoop[3]}}" width="80px" height="auto"> 
+							     		<img ng-src="{{place.imgPoop[4]}}" width="80px" height="auto">
 					     			</div>
 					     		</div>
 					     		<div class="col-sm-4">
@@ -44,20 +44,11 @@
 					     			</div>
 					     		</div>
 					     	</div>
-					     	</div>
+					    </div>
 					     	
 					     
-					    </div>
-				    </div>
+					</div>
 			    </div>
 			  </a>
 		 </div>
-		<div class="card-box cor-cardT2">
-		<div class="row">
-			<div class="col-xs-12">
-				<label class="text-lg cor-titulo1">BEST PLACES NEAR YOUR LOCATION</label>	
-			</div>
-		</div>
 	</div>
-	</div>
-</div> 
