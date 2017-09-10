@@ -1,7 +1,9 @@
 # Whoops
-An app that finds the nearest places with a restroom (within a certain radius), and lets the user rate and see other users ratings.
-
-Built by Pickle Riiick:
+An app(Whoops) that finds the nearest places with a restroom (within a certain radius).
+The users can leave a comment and a rate(1 to 5 poops). You will never have to wait to get home again. Unlock unchievments and climb the rankings.
+Users can get an "in action" experience with several passtimes given by the app while you are in your stall.
+Turn a bad feeling into an adventure.Whoops! Where to poops.
+Built by Pickle Riiick *burp* :
 
 * João Ribeiro
 * Luis Sousa
