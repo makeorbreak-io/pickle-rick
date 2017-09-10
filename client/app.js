@@ -32,11 +32,13 @@ app.config(function($routeProvider, $locationProvider) {
 
 
 app.controller('homepage', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	$scope.distanceRange;
 	$scope.init = function(){
+		$scope.distanceRange = 500;
 	}
 
 	$scope.openResults = function(){
-		$location.path('/resultsRestroom');
+		$location.path('/resultsRestroom').search({range: $scope.distanceRange});
 	}
 }]);
 
@@ -354,7 +356,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 }]);
 
 
-app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$location', '$routeParams', function($scope, $http, $interval, $window, $location, $routeParams){
 	$scope.allRestrooms = [];
 	$scope.nearRestrooms = [];
 	$scope.init = function(){
@@ -503,12 +505,13 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 
 	$scope.getPlaces = function(){
+		var distanceRange = $routeParams.range;
 		var actualLocation = new google.maps.LatLng(41.1500879,-8.6042214);
         service = new google.maps.places.PlacesService(document.getElementById("conteudo"));
         var request = {
             location: actualLocation,
-            radius: '20000',
-            type: ['park']
+            radius: distanceRange,
+            type: ['restaurant']
         };
         service.nearbySearch(request, callback);
 
@@ -516,8 +519,8 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 	function callback(results, status) {
         var i = 0;
-        var maxResults = 5;
-        if(results.length < 5){
+        var maxResults = 10;
+        if(results.length < 10){
         	maxResults = results.length;
         }
         for(i = 0; i < maxResults; i++){
