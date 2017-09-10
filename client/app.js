@@ -199,7 +199,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	else if($scope.restroomRate < "4.5"){
 	    		$scope.poopRate = "assets/rate4.png"
 	    	}
-	    	else if($scope.restroomRate <= "5"){
+	    	else if($scope.restroomRate <= "5.0"){
 	    		$scope.poopRate = "assets/rate5.png"
 	    	}
 	    	else{
@@ -406,7 +406,7 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	$scope.init = function(){
 		$scope.getAllPlaces();
 	}
-
+	$scope.noResults = false;
 	$scope.getAllPlaces = function(){
 		$http({
 	        method : "GET",
@@ -567,12 +567,20 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
         if(results.length < 10){
         	maxResults = results.length;
         }
+        console.log("GOOOOOGLE");
+        console.log(results);
         for(i = 0; i < maxResults; i++){
         	console.log("Resultados API!");
-        	console.log(results[i].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500}));
+        	
         	checkIfExists(results[i]);
 
        		$scope.nearRestrooms.push(results[i]);
+        }
+        if($scope.nearRestrooms.length == 0 ){
+        	$scope.noResults = true
+        }
+        else{
+        	$scope.noResults = false;
         }
         console.log("NEAR");
         console.log($scope.nearRestrooms);
@@ -593,6 +601,11 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
     $scope.createRestroom = function(restroom){
     	console.log("RESTROOM to add");
     	console.log(restroom)
+    	var restroomPhoto = ""
+    	if(restroom.photos){
+    		console.log("NAO TEM FOTO");
+    		restroomPhoto = restroom.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+    	}
     	$http({
 	        method : "POST",
 	        url : "api/restrooms",
@@ -607,7 +620,7 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	        	"totalFavorites": 0,
 	        	"reference": restroom.reference,
 	        	"address": restroom.vicinity,
-	        	"photoUrl" : restroom.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500})
+	        	"photoUrl" : restroomPhoto
 
 	        }
 	    }).then(function success(response) {  
