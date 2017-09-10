@@ -10,6 +10,7 @@ var Achievement = require('../models/achievement');
 var userAchievements = require('../models/userAchievements');
 var Rating = require('../models/rating');
 var restroomBadges = require('../models/restroomBadges');
+var Comment = require('../models/comments');
 
 //Routes
 User.methods(['get', 'put', 'post', 'delete']);
@@ -30,6 +31,8 @@ Rating.register(router, '/ratings');
 restroomBadges.methods(['get', 'put', 'post', 'delete']);
 restroomBadges.register(router, '/restroomBadges');
 
+Comment.methods(['get', 'put', 'post', 'delete']);
+Comment.register(router, '/comments');
 
 //Return router
 module.exports = router;

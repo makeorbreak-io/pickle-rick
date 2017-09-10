@@ -100,6 +100,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 		$scope.getRestroomData();
 		$scope.getRating();
 		$scope.getBadges();
+		$scope.getComments();
 	}
 
 	$scope.getRestroomId = function(){
@@ -255,6 +256,47 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	}
 	    	$scope.getRating();
 	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.comment = "";
+	$scope.leaveComment = function(){
+		console.log($scope.comment);
+		$http({
+	        method : "POST",
+	        url : "api/comments",
+	        data: {
+	        	"idUser" : userId,
+	        	"idRestroom" : $scope.restroom._id,
+	        	"commentDescription" : $scope.comment,
+	        	"nameUser" : "Vasco Ribeiro"
+
+	        }
+	    }).then(function success(response) { 
+	    	$scope.getComments();
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+	$scope.allComments = [];
+
+	$scope.getComments = function(){
+		console.log("CENAS")
+		$http({
+	        method : "GET",
+	        url : "api/comments"
+	    }).then(function success(response) {
+	    	var i;
+	    	console.log($scope.restroom._id);
+	    	for(i = 0; i < response.data.length; i++){
+	    		if(response.data[i].idRestroom == $scope.restroom._id){
+	    			$scope.allComments.push(response.data[i]);
+	    		}
+	    	}
+	        console.log($scope.allComments);
 	    }, function error(response) {
 	        console.log(response);
 	    });

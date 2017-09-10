@@ -88,10 +88,10 @@
 							<br>
 							<br>
 							<br>
-							<textarea rows="5" class="col-xs-12" style="font-size:40px; border:1px solid black"></textarea>
+							<textarea ng-model="comment" rows="5" class="col-xs-12" style="font-size:40px; border:1px solid black"></textarea>
 
 							</center>
-							<button class="btn btn-primary btn-lg" style="margin-top:20px">Leave Comment</button>
+							<button class="btn btn-primary btn-lg"  ng-click="leaveComment()" style="margin-top:20px">Leave Comment</button>
 					</div>
 				</div>
 			</div>
@@ -147,7 +147,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12">
+		
+		
+
+		<div ng-repeat="com in allComments" class="col-xs-12">
 			<div class="card-box">
 				<div class="row">
 					<div class="col-xs-12" id="cabecalhoComentario">
@@ -158,47 +161,31 @@
 										<img src="lula.jpg"  style="height: 100px; width: 100px; border-radius: 55px" >
 									</div>
 									<div class="col-xs-6">
-										<label class="text-md">Luis Sousa</label>
-										<label class="text-sm text-muted">60 poops • 30 comments</label>
+										<label class="text-md">{{com.nameUser}}</label>
+										
 									</div>
 								</div>
 							</div>
 						</div>
 						<br>
-						<div class="row">
-							<div class="col-xs-5">
-								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
-								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
-								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
-								<label class="text-md"><span class="glyphicon glyphicon-star text-lg cor-verde"></span></label>
-								<label class="text-md"><span class="glyphicon glyphicon-star-empty text-lg cor-verde"></span></label>
-							</div>
-						</div>
-						<br>
+						
 						<div class="row">
 							<div class="col-xs-12">
 								<label class="text-md">
-									Gostei muito desta casa de banho, bastante limpa, nao tive de pagar e correspondeu as expectativas.
-									Recomendo para toda a gente.
+									{{com.commentDescription}}
 								</label>
 							</div>
 						</div>
-						<br>
-						<div class="row">
-							<div class="col-xs-6">
-								<label class="text-md text-muted">6 likes</label>
-							</div>
-						</div>
+						
 						<hr>
-						<div class="row">
-							<div class="col-xs-8">
-								<label class="text-lg text-muted"><span class="glyphicon glyphicon-heart text-lg text-muted"></span> like</label>
-							</div>
-						</div>
+						
 					</div>
+
+
+					
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 
 <div>
