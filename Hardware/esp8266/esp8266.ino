@@ -85,7 +85,7 @@ void loop() {
        setMotor(speed, Orient);
        Serial.print("Velocidade = ");
        Serial.println(speed);
-       delay(3000);
+       delay(1500);
        client.flush();
        speed = 0;
   }
@@ -99,7 +99,7 @@ void loop() {
        setMotor(speed, Orient);
        Serial.print("Velocidade = ");
        Serial.println(speed);
-       delay(3000);
+       delay(1500);
        client.flush();
        speed = 0;
   }
