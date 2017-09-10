@@ -1,4 +1,4 @@
-<div ng-controller="homepage" class="container-fuid">
+<div ng-controller="homepage" class="container-fuid" ng-init="init()">
 	<div class="container">
 		<div class="row justify-content-sm-center">
 			<center>
@@ -8,7 +8,9 @@
 			<div class="col-sm-12">
 				<center> 
 					<img ng-click="openResults()" src="assets/where_button.png" width="80%" style="margin-top: 10%">
-					
+					<input ng-model="distanceRange" type="range" min="1" max="1000" value="300" class="slider" id="myRange">
+					<br>
+					<label class="text-lg">Max Search Radius: {{distanceRange}} m</label>
 				</center>
 			</div>
 		</div>

@@ -6,7 +6,23 @@
 			</div>
 		</div>
 	</div>
-		
+		<div ng-show="noResults" class="card-box-redondo cor-card1" >
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-2">
+							<img src="assets\tear-poop.png " style="height: 100px; width: 100px;"">
+						</div>
+						<div class="col-xs-10">
+							<div>
+								<label class="text-lg cor-letra-md">Whoops! Looks like you have to wait a little longer</label>
+								<label class="text-md text-muted">Try to increase your search radius</label>
+							</div>
+						</div>
+					</div>
+				</div>		
+			</div>	
+		</div>
 		<div class="list-group">
 			<a class="list-group-item card-box-redondo cor-card1 list-group-item-action flex-column align-items-start" ng-repeat="place in nearRestrooms track by $index" ng-click="openRestroom(place)">
 			    <div class="row">
@@ -28,15 +44,17 @@
 							     		<img ng-src="{{place.imgPoop[2]}}" width="80px" height="auto"> 
 							     		<img ng-src="{{place.imgPoop[3]}}" width="80px" height="auto"> 
 							     		<img ng-src="{{place.imgPoop[4]}}" width="80px" height="auto">
+
+							     		
 					     			</div>
 					     		</div>
 					     		<div class="col-sm-4">
 					     			<div class="row" ng-init="getInternalId2(place.id, $index)">
 					     				
-					     				<img ng-show="place.badgeConfort" src="assets/CFB.png" width="80px" height="auto">
-					     				<img ng-show="place.badgeClean" src="assets/CB.png" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgeConfort}}" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgeClean}}" width="80px" height="auto">
 
-					     				<img ng-show="place.badgePrivacy" src="assets/PB.png" width="80px" height="auto">
+					     				<img ng-src="{{place.imgBadgePrivacy}}" width="80px" height="auto">
 					     			</div>
 					     		</div>
 					     	</div>

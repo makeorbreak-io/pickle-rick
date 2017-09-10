@@ -1,5 +1,5 @@
 var modalInstance = {};
-var app = angular.module('myApp', ['ngRoute', 'ngMaterial']);
+var app = angular.module('myApp', ['ngRoute', 'ngMaterial','ngMessages']);
 
 var userId = "59b299729751dd27889de49c";
 
@@ -27,17 +27,49 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/pooping', {
     	templateUrl : "views/poopingPage.html" 
     })
+    .when('/hangGame', {
+    	templateUrl : "views/hangGame.html" 
+    })
+    
 });
 
 
 app.controller('homepage', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	$scope.distanceRange;
 	$scope.init = function(){
+		$scope.distanceRange = 500;
 	}
 
 	$scope.openResults = function(){
-		$location.path('/resultsRestroom');
+		$location.path('/resultsRestroom').search({range: $scope.distanceRange});
 	}
 }]);
+
+
+app.controller('menu', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	$scope.textColor1 = "";
+	$scope.textColor2 = "text-primary";
+	$scope.textColor3 = "";
+
+	$scope.changeTab1 = function(){
+		$scope.textColor2 = "";
+		$scope.textColor1 = "text-primary";
+		$scope.textColor3 = "";
+	}
+
+	$scope.changeTab2 = function(){
+		$scope.textColor1 = "";
+		$scope.textColor2 = "text-primary";
+		$scope.textColor3 = "";
+	}
+
+	$scope.changeTab3 = function(){
+		$scope.textColor2 = "";
+		$scope.textColor3 = "text-primary";
+		$scope.textColor1 = "";
+	}
+}]);
+
 
 app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
 	$scope.users = [];
@@ -59,7 +91,23 @@ app.controller('profile', ['$scope', '$http', '$interval', '$window', '$location
 	        method : "GET",
 	        url : "api/users/" + userId
 	    }).then(function success(response) {
+	        
 	        $scope.user = response.data;
+	        $scope.getNumberOfPoops();
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.getNumberOfPoops = function(){
+		console.log("DADOS");	
+		$http({
+	        method : "GET",
+	        url : "api/ratings?idUser=" + userId
+	    }).then(function success(response) {
+	        
+	        $scope.numberOfPoops = response.data;
+	        console.log($scope.numberOfPoops);
 	    }, function error(response) {
 	        console.log(response);
 	    });
@@ -100,6 +148,7 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 		$scope.getRestroomData();
 		$scope.getRating();
 		$scope.getBadges();
+		$scope.getComments();
 	}
 
 	$scope.getRestroomId = function(){
@@ -136,10 +185,28 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    	}
 	    	$scope.restroomTotalRates = totalRates;
 	    	if(totalRates == 0){
-	    		$scope.restroomRate = "Sem classificação";
+	    		$scope.restroomRate = "N/A";
 	    	}
 	    	else{
 	    		$scope.restroomRate = (scoreRate/totalRates).toFixed(1) + " / 5";
+	    	}
+	    	if($scope.restroomRate < "1.5" ){
+	    		$scope.poopRate = "assets/rate1.png"
+	    	}
+	    	else if($scope.restroomRate < "2.5"){
+	    		$scope.poopRate = "assets/rate2.png"
+	    	}
+	    	else if($scope.restroomRate < "3.5"){
+	    		$scope.poopRate = "assets/rate3.png"
+	    	}
+	    	else if($scope.restroomRate < "4.5"){
+	    		$scope.poopRate = "assets/rate4.png"
+	    	}
+	    	else if($scope.restroomRate <= "5.0"){
+	    		$scope.poopRate = "assets/rate5.png"
+	    	}
+	    	else{
+	    		$scope.poopRate = "assets/ratesleep.png"
 	    	}
 	    	
 
@@ -155,7 +222,9 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	    }).then(function success(response) {
 	    	var i;
 	    	var totalBadges = 0;
-
+			$scope.badgesPrivacy = 0;
+			$scope.badgesConfort = 0;
+			$scope.badgesClean = 0;
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == $scope.restroom._id){
 	    			if(response.data[i].idUser == userId){
@@ -186,9 +255,40 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 						$scope.imgClean = "assets/CB.png";
 						console.log("Clean");
 	    			}
+
+	    			
+
+
 	    		}
 
 	    	}
+	    	console.log("Privacy: " + $scope.badgesPrivacy);
+
+	    	console.log("Confort: " + $scope.badgesConfort);
+
+	    	console.log("Clean: " + $scope.badgesClean);
+	    	if($scope.badgesPrivacy >= 5 && $scope.badgesPrivacy < 10){
+		    		$scope.imgPrivacy = "assets/PP.png";
+		    	}
+		    	else if($scope.badgesPrivacy >= 10){
+		    		$scope.imgPrivacy = "assets/PO.png";
+		    	}
+
+		    	if($scope.badgesConfort >= 5 && $scope.badgesConfort < 10){
+		    		$scope.imgConfort = "assets/CFP.png";
+		    	}
+		    	else if($scope.badgesConfort >= 10){
+		    		$scope.imgConfort = "assets/CFO.png";
+		    	}
+
+		    	if($scope.badgesClean >= 5 && $scope.badgesClean < 10){
+		    		$scope.imgClean = "assets/CP.png";
+		    	}
+		    	else if($scope.badgesClean >= 10){
+		    		$scope.imgClean = "assets/CO.png";
+		    	}
+
+	    	
 	    	$scope.restroomTotalBadges = totalBadges;
 	    	
 	    	
@@ -259,16 +359,57 @@ app.controller('restroom', ['$scope', '$http', '$interval', '$window', '$locatio
 	        console.log(response);
 	    });
 	}
+
+	$scope.comment = "";
+	$scope.leaveComment = function(){
+		console.log($scope.comment);
+		$http({
+	        method : "POST",
+	        url : "api/comments",
+	        data: {
+	        	"idUser" : userId,
+	        	"idRestroom" : $scope.restroom._id,
+	        	"commentDescription" : $scope.comment,
+	        	"nameUser" : "Vasco Ribeiro"
+
+	        }
+	    }).then(function success(response) { 
+	    	$scope.getComments();
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+	$scope.allComments = [];
+
+	$scope.getComments = function(){
+		console.log("CENAS")
+		$http({
+	        method : "GET",
+	        url : "api/comments"
+	    }).then(function success(response) {
+	    	var i;
+	    	console.log($scope.restroom._id);
+	    	for(i = 0; i < response.data.length; i++){
+	    		if(response.data[i].idRestroom == $scope.restroom._id){
+	    			$scope.allComments.push(response.data[i]);
+	    		}
+	    	}
+	        console.log($scope.allComments);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
 }]);
 
 
-app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$location', '$routeParams', function($scope, $http, $interval, $window, $location, $routeParams){
 	$scope.allRestrooms = [];
 	$scope.nearRestrooms = [];
 	$scope.init = function(){
 		$scope.getAllPlaces();
 	}
-
+	$scope.noResults = false;
 	$scope.getAllPlaces = function(){
 		$http({
 	        method : "GET",
@@ -350,25 +491,56 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	    }).then(function success(response) {
 	    	var i;
 	    	var totalBadges = 0;
+	    	$scope.nearRestrooms[index].badgePrivacy = 0;
+	    	$scope.nearRestrooms[index].badgeClean = 0;
+	    	$scope.nearRestrooms[index].badgeConfort = 0;
 
 	    	for(i = 0; i < response.data.length; i++){
 	    		if(response.data[i].idRestroom == internalId){
 	    			
 	    			if(response.data[i].badge == 1){
-	    				$scope.nearRestrooms[index].badgePrivacy = true;
-						console.log("Privacidade");
+	    				$scope.nearRestrooms[index].badgePrivacy++;
 	    			}
 	    			else if(response.data[i].badge == 2){
-	    				$scope.nearRestrooms[index].badgeConfort = true;
-						console.log("Conf");
+	    				$scope.nearRestrooms[index].badgeConfort++;
 	    			}
 	    			else if(response.data[i].badge == 3){
-	    				$scope.nearRestrooms[index].badgeClean = true;
-						console.log("Clean");
+	    				$scope.nearRestrooms[index].badgeClean++;
 	    			}
 	    		}
-
 	    	}
+
+	    	if($scope.nearRestrooms[index].badgePrivacy > 0 && $scope.nearRestrooms[index].badgePrivacy < 5){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgePrivacy >= 5 && $scope.nearRestrooms[index].badgePrivacy < 10){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgePrivacy >= 10){
+	    		$scope.nearRestrooms[index].imgBadgePrivacy = "assets/PO.png"
+	    	}
+
+	    	if($scope.nearRestrooms[index].badgeConfort > 0 && $scope.nearRestrooms[index].badgeConfort < 5){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 5 && $scope.nearRestrooms[index].badgeConfort < 10){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 10){
+	    		$scope.nearRestrooms[index].imgBadgeConfort = "assets/CFO.png"
+	    	}
+
+	    	if($scope.nearRestrooms[index].badgeClean > 0 && $scope.nearRestrooms[index].badgeClean < 5){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CB.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeClean >= 5 && $scope.nearRestrooms[index].badgeClean < 10){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CP.png"
+	    	}
+	    	else if($scope.nearRestrooms[index].badgeConfort >= 10){
+	    		$scope.nearRestrooms[index].imgBadgeClean = "assets/CO.png"
+	    	}
+	    	
+
 	    	$scope.restroomTotalBadges = totalBadges;
 	    	
 	    	
@@ -380,12 +552,13 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 
 	$scope.getPlaces = function(){
+		var distanceRange = $routeParams.range;
 		var actualLocation = new google.maps.LatLng(41.1500879,-8.6042214);
         service = new google.maps.places.PlacesService(document.getElementById("conteudo"));
         var request = {
             location: actualLocation,
-            radius: '20000',
-            type: ['park']
+            radius: distanceRange,
+            type: ['restaurant']
         };
         service.nearbySearch(request, callback);
 
@@ -393,16 +566,24 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 
 	function callback(results, status) {
         var i = 0;
-        var maxResults = 5;
-        if(results.length < 5){
+        var maxResults = 10;
+        if(results.length < 10){
         	maxResults = results.length;
         }
+        console.log("GOOOOOGLE");
+        console.log(results);
         for(i = 0; i < maxResults; i++){
         	console.log("Resultados API!");
-        	console.log(results[i].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500}));
+        	
         	checkIfExists(results[i]);
 
        		$scope.nearRestrooms.push(results[i]);
+        }
+        if($scope.nearRestrooms.length == 0 ){
+        	$scope.noResults = true
+        }
+        else{
+        	$scope.noResults = false;
         }
         console.log("NEAR");
         console.log($scope.nearRestrooms);
@@ -423,6 +604,11 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
     $scope.createRestroom = function(restroom){
     	console.log("RESTROOM to add");
     	console.log(restroom)
+    	var restroomPhoto = ""
+    	if(restroom.photos){
+    		console.log("NAO TEM FOTO");
+    		restroomPhoto = restroom.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
+    	}
     	$http({
 	        method : "POST",
 	        url : "api/restrooms",
@@ -437,7 +623,7 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
 	        	"totalFavorites": 0,
 	        	"reference": restroom.reference,
 	        	"address": restroom.vicinity,
-	        	"photoUrl" : restroom.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500})
+	        	"photoUrl" : restroomPhoto
 
 	        }
 	    }).then(function success(response) {  
@@ -451,4 +637,105 @@ app.controller('resultsRestroom', ['$scope', '$http', '$interval', '$window', '$
     	$location.path('/restroom').search({id: place.id});;
     }
     
+ 
+  $scope.color = {
+    red: Math.floor(Math.random() * 255),
+    green: Math.floor(Math.random() * 255),
+    blue: Math.floor(Math.random() * 255)
+  };
+
+  $scope.rating1 = 3;
+  $scope.rating2 = 2;
+  $scope.rating3 = 4;
+
+  $scope.disabled1 = Math.floor(Math.random() * 100);
+  $scope.disabled2 = 0;
+  $scope.disabled3 = 70;
+
+  $scope.invert = Math.floor(Math.random() * 100);
+
+  $scope.isDisabled = true;
+}]);
+
+app.controller('hangGame', ['$scope', '$http', '$interval', '$window', '$location', function($scope, $http, $interval, $window, $location){
+	//1 - rock
+	//2 - paper
+	//3 - scissor
+
+	$scope.showDraw = false;
+	$scope.showWin = false;
+	$scope.showLost = false;
+	$scope.init = function(){
+		
+	}
+	$scope.computerPlay;
+
+	$scope.play = function(idPlay){
+		$scope.showDraw = false;
+		$scope.showWin = false;
+		$scope.showLost = false;
+		$scope.computerPlay = Math.floor((Math.random() * 3) + 1);
+		if(idPlay == $scope.computerPlay){
+			$scope.showDraw = true;
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+		}
+		else if( (idPlay == 1 && $scope.computerPlay == 2) || (idPlay == 2 && $scope.computerPlay == 3) || (idPlay == 3 && $scope.computerPlay == 1) ){
+			$scope.showLost = true;
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+			$scope.papelR();
+		}
+		else{
+			if($scope.computerPlay == 1){
+				$scope.imgGame = "assets/rock.png";
+			}
+			else if($scope.computerPlay == 2){
+				$scope.imgGame = "assets/paper.png";
+			}
+			else{
+				$scope.imgGame = "assets/scissor.png";
+			}
+			$scope.showWin = true;
+			$scope.papel();
+		}
+	}
+
+	$scope.papel = function(){
+		console.log
+		$http({
+	        method : "POST",
+	        url : "http://192.168.1.60/motor"
+	    }).then(function success(response) {
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
+
+	$scope.papelR = function(){
+		console.log
+		$http({
+	        method : "POST",
+	        url : "http://192.168.1.60/motorev"
+	    }).then(function success(response) {
+	        console.log(response);
+	    }, function error(response) {
+	        console.log(response);
+	    });
+	}
 }]);
